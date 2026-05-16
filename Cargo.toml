@@ -1,0 +1,27 @@
+[package]
+name = "llm-retry"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.75"
+description = "Runtime-agnostic exponential backoff with full jitter for LLM API calls. Built-in retryable-error code lists for Anthropic, OpenAI, AWS Bedrock, Google. Sync + tokio. Pure-std core."
+authors = ["Mukunda Rao Katta <mukunda.vjcs6@gmail.com>"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/MukundaKatta/llm-retry"
+homepage = "https://github.com/MukundaKatta/llm-retry"
+documentation = "https://docs.rs/llm-retry"
+readme = "README.md"
+keywords = ["llm", "retry", "backoff", "anthropic", "bedrock"]
+categories = ["asynchronous", "network-programming"]
+exclude = [".github/*", "target/*"]
+
+[dependencies]
+rand = { version = "0.8", default-features = false, features = ["std", "std_rng"] }
+thiserror = "2"
+tokio = { version = "1", default-features = false, features = ["time"], optional = true }
+
+[features]
+default = []
+tokio = ["dep:tokio"]
+
+[dev-dependencies]
+tokio = { version = "1", features = ["macros", "rt", "time"] }
