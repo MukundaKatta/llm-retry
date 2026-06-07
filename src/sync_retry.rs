@@ -23,10 +23,8 @@ pub fn retry<T, E, F>(
 where
     F: FnMut() -> Result<T, E>,
 {
-    if config.max_attempts == 0 {
-        // edge case: nothing to do
-        // call op once anyway so we have an error to report
-    }
+    // `max_attempts == 0` is treated as 1: we always call `op` at least once
+    // so there is an error (or value) to report.
     let attempts = config.max_attempts.max(1);
     let mut rng = thread_rng();
 
